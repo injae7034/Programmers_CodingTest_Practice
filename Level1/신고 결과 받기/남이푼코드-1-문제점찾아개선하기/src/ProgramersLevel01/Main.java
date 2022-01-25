@@ -28,36 +28,34 @@ public class Main {
                     reportingUsers.put(usedId, new HashSet<>());
                 }
                 StringTokenizer tokens = null;//문자열을 분리해서 저장할 임시 공간
-                int index = 0;
-                List<String> reportingIds = new ArrayList<>(); //신고한 회원 id들을 저장할 임시 공간
-                List<String> reportedIds = new ArrayList<>();//신고당한 회원 id들을 저장할 임시 공간
-                //신고한 회원과 신고당한 회원의 기록(recording)이 있는 report의 처음부터 마지막까지 반복한다.
-                for(String recording : report)
+                String[] reportingIds = new String[report.length]; //신고한 회원 id들을 저장할 배열
+                String[] reportedIds = new String[report.length];//신고당한 회원 id들을 저장할 배열
+                //신고한 회원과 신고당한 회원의 기록이 있는 report의 처음부터 마지막까지 반복한다.
+                for(int i = 0; i < report.length; i++)
                 {
                     //공백을 구분으로 문자열을 분리하는 StringTokenizer객체를 생성한다.
-                    tokens = new StringTokenizer(recording, " ");
-                    //신고한 회원 id를 구하여 ArrayList에 저장한다.
-                    reportingIds.add(tokens.nextToken());
-                    //신고당한 회원 id를 구하여 ArrayList에 저장한다.
-                    reportedIds.add(tokens.nextToken());
+                    tokens = new StringTokenizer(report[i], " ");
+                    //신고한 회원 id를 구하여 문자열 배열에 저장한다.
+                    reportingIds[i] = tokens.nextToken();
+                    //신고당한 회원 id를 구하여 문자열 배열에 저장한다.
+                    reportedIds[i] = tokens.nextToken();
                     //유저가 자신이 신고한 회원 id 기록에 신고당한 회원 id를 추가할 수 있으면
                     //(=유저가 자신이 신고한 회원의 기록에 똑같은 id 중복이 없으면)
-                    if(reportingUsers.get(reportingIds.get(index)).add(reportedIds.get(index)) == true)
+                    if(reportingUsers.get(reportingIds[i]).add(reportedIds[i]) == true)
                     {
                         //신고당한 회원의 신고횟수 기록을 +1 증가시킨다.
-                        reportedUsers.put(reportedIds.get(index),
-                                reportedUsers.get(reportedIds.get(index)) + 1);
+                        reportedUsers.put(reportedIds[i],
+                                reportedUsers.get(reportedIds[i]) + 1);
                     }
-                    index++;
                 }
-                //신고한 회원과 신고당한 회원의 기록(recording)이 있는 report의 처음부터 마지막까지 반복한다.
-                for(int i = 0; i < index; i++)
+                //신고한 회원과 신고당한 회원의 기록이 있는 report의 처음부터 마지막까지 반복한다.
+                for(int i = 0; i <  report.length; i++)
                 {
                     //신고당한 회원 id의 신고당한 횟수가 k보다 작으면
-                    if(reportedUsers.get(reportedIds.get(i)) < k)
+                    if(reportedUsers.get(reportedIds[i]) < k)
                     {
                         //유저가 신고한 회원리스트 중에서 신고당한 회원 id 기록을 지운다.
-                        reportingUsers.get(reportingIds.get(i)).remove(reportedIds.get(i));
+                        reportingUsers.get(reportingIds[i]).remove(reportedIds[i]);
                     }
                 }
                 //회원 아이디의 처음부터 마지막까지 반복한다.
