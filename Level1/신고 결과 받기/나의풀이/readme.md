@@ -1,3 +1,5 @@
+# 내가 푼 코드
+
 ```java
 package ProgramersLevel01;
 
@@ -74,7 +76,7 @@ public class Main
 }
 ```
 
-# 내 풀이에서 부족한 점
+# 내가 푼 코드에서 부족한 점
 ## 첫번째, Map<String, List\<Integer\>\>까지 밖에 생각을 못함.
 ### 그래서 한 회원이 똑같은 회원을 중복해서 신고하는 경우를 거르지 못함.
 ## 두번째, 신고한 회원만 Map을 이용하고, 신고당한 회원은 ArrayList를 사용
