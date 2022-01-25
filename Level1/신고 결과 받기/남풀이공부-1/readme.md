@@ -1,3 +1,5 @@
+# 남이 푼 코드
+
 ```java
 package ProgramersLevel01;
 
@@ -76,7 +78,8 @@ public class Main {
     }
 }
 ```
-# 코드 해석
+# 남이 푼 코드 해석
+
 먼저 answer배열을 힙에 할당하는데 크기는 id_list의 length와 동일하게 할당합니다.<br><br>
 그 이유는 answer의 각 배열요소에는 id_list의 각 배열요소(유저id)가 정지시킨 회원 id 수가 저장되기 때문입니다.<br><br>
 그래서 answer의 크기는 id_list의 개수와 같아야 하고, 그 순서도 같아야 합니다.<br><br>
