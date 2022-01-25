@@ -14,11 +14,11 @@ public class Main {
                 //answer배열을 id_list 배열크기만큼 힙에 할당한다.
                 int[] answer = new int[id_list.length];
                 //신고한 유저의 id(String)를 Key값으로 하고, 자신이 신고한 유저 id(String) 리스트를
-                //Set으로 관리하는데 이 값이 Value인 Map의 객체를 LinkedHashMap의 생성자로 생성한다.
-                Map<String, Set<String>> reportingUsers = new LinkedHashMap<>();
+                //Set으로 관리하는데 이 값이 Value인 Map의 객체를 HashMap의 생성자로 생성한다.
+                Map<String, Set<String>> reportingUsers = new HashMap<>();
                 //신고당한 유저의 id(String)를 Key값으로 하고, 신고당한 횟수(Integer)를 Value로 하는
-                //Map의 객체를 LinkedHashMap의 생성자로 생성한다.
-                Map<String, Integer> reportedUsers = new LinkedHashMap<>();
+                //Map의 객체를 HashMap의 생성자로 생성한다.
+                Map<String, Integer> reportedUsers = new HashMap<>();
                 //신고한 유저와 신고당한 유저의 Map객체들을 초기화시켜준다.
                 //두 객체의 Key값은 id_list의 배열요소인 유저id로 같음.
                 for(String usedId : id_list)
@@ -26,7 +26,7 @@ public class Main {
                     //신고당한 유저들의 신고당한횟수를 0으로 초기화시킨다.
                     reportedUsers.put(usedId, 0);
                     //유저들이 신고한 유저 id 리스트를 관리할 Set을 생성한다.
-                    reportingUsers.put(usedId, new LinkedHashSet<>());
+                    reportingUsers.put(usedId, new HashSet<>());
                 }
                 StringTokenizer tokens = null;//문자열을 분리해서 저장할 임시 공간
                 String reportingId;//신고한 회원 id를 저장할 임시 공간
@@ -75,14 +75,13 @@ public class Main {
         }
     }
 }
-
 ```
 # 코드 해석
 먼저 answer배열을 힙에 할당하는데 크기는 id_list의 length와 동일하게 할당합니다.<br><br>
 그 이유는 answer의 각 배열요소에는 id_list의 각 배열요소(유저id)가 정지시킨 회원 id 수가 저장되기 때문입니다.<br><br>
 그래서 answer의 크기는 id_list의 개수와 같아야 하고, 그 순서도 같아야 합니다.<br><br>
 즉, answer의 배열요소는 id_list에서 각 배열요소(유저id)가 정지시킨 회원 id 수를 의미합니다.<br><br>
-Map의 객체를 자신의 자식인 LinkedHashMap의 생성자를 이용해 생성합니다.<br><br>
+Map의 객체를 자신의 자식인 HashMap의 생성자를 이용해 생성합니다.<br><br>
 왜냐하면 Map은 추상클래스이기 때문에 자신의 자식의 생성자를 이용해서만 생성할 수 있습니다.<br><br>
 Map의 객체인 **reportingUsers**는 **신고한 회원id**와 **자신이 신고한 회원id 집합**으로 구성되는데, **Key값이 신고한 유저의 id(String)** 이고, **Value값이 자신이 신고한 유저 id(String) 집합인 Set**입니다.<br><br>
 또다른 Map의 객체인 **reportedUsers**는 **신고당한 회원id**와 **신고당한 횟수**로 구성되는데, **Key값이 신고당한 유저의 id(String)** 이고, **Value값이 신고당한 횟수(Integer)** 입니다.<br><br>
@@ -93,7 +92,7 @@ Map의 객체들을 생성했으면 이제 이 객체들을 초기화시켜줄 �
 그래서 이 동일한 key값을 이용하여 동시에 초기화시켜 줄 수 있습니다.<br><br>
 회원id를 문자열 배열(String[])로 저장하고 있는 id_list의 문자열(회원id)을 처음부터 끝까지 반복하는데 이 때 for each 반복문을 통해 회원id를 하나씩 구하는데 그 참조변수값을 **userId**로 설정합니다.<br><br>
 **reportedUsers**는 **userId**(Key값)와 0을(Value값이 Integer이기 때문에) 매개변수로 하는 put 메소드를 호출합니다.<br><br>
-**reportingUsers**는 **userId**(Key값)와 new LinkedHashSet\<String\>의 생성자(Value값이 String을 집합으로 하는 Set이기 때문에)를 매개변수로 하는 put 메소드를 호출합니다.<br><br>
+**reportingUsers**는 **userId**(Key값)와 new HashSet\<String\>의 생성자(Value값이 String을 집합으로 하는 Set이기 때문에)를 매개변수로 하는 put 메소드를 호출합니다.<br><br>
 이런식으로 id_list에 저장된 userId를 처음부터 끝까지 매개변수로 하여 **reportedUsers**와 **reportingUsers**를 처음부터 마지막까지 초기화시켜줍니다.<br><br>
 그 다음으로는 신고한 회원이 어떤 회원을 신고했는지에 대한 기록 정보가 담긴 report문자열 배열을 살펴 볼 차례입니다.<br><br>
 report의 각 배열요소는 신고한 회원id와 신고당한 회원id를 가지고 있는데 공백으로 이 둘을 구분하고 있습니다.<br><br>
@@ -121,3 +120,15 @@ Set에 **reportedId**의 **중복이 있으면 Set에 reportedId가 추가되지
 이렇게 for each 반복이 끝나고 나면 **reportingUsers**에는 Key값인 신고한 회원id에 자신이 신고한 회원 id집합이 Value로 매칭되어 있을 것입니다.<br><br>
 **reportedUsers**에는 key값인 신고당한 회원id에 신고당한 횟수가 Value로 매칭되어 있을 것입니다.<br><br>
 이제 특정횟수(k)를 넘는 경우에만 회원 id가 정지되고, 이 정지된 회원 id를 신고한 회원에게 알림이 날라가는데 이 알림 횟수를 처리해야 합니다.<br><br>
+그러기 위해서 for each 반복을 통해 report의 배열요소인 문자열을 처음부터 끝까지 하나씩 구하면서 반복을 돌립니다.<br><br>
+for each 반복문 내부에서 다시 StringTokenizer를 통해 공백으로 구분된 문자열을 추출하여 **reportedId**와 **reportingId**를 구합니다.<br><br>
+**reportedUsers**의 **get**메소드에 key값인 **reportedId**를 매개변수로 전달하여 **반환값인 Value값이 특정횟수(k)보다 작으면**<br><br>
+**reportingUsers**의 **get**메소드에 Key값인 **reportingId**를 매개변수로 전달하여 **반환값(Valuer값)인 Set**에서 **remove** 메소드를 호출하여<br><br>
+**특정횟수(k)보다 신고횟수가 작은 reportedId를 Set에서 지웁니다.**<br><br>
+**reportingId가 reportedId를 신고했기 때문에 Set에는 반드시 reportedId 가 있습니다.**<br><br>
+그래서 reportedId가 특정횟수(k)보다 작으면 Set에서 reportedId를 지웁니다.<br><br>
+이렇게 for each 반복구문이 종료되고 나면 **reportingUsers**의 **Value값인 Set**에는 **정지 당한 id만 저장**되어 있습니다.<br><br>
+**정지 당한 id = 처리 결과 메일 수**이기 마지막으로 회원 id리스트인 id_list의 처음부터 끝까지 반복을 돌립니다.<br><br>
+answer는 위에서 id_list의 length만큼 힙에 할당했기 때문에 모든 배열요소가 0으로 초기화되어 있습니다.<br><br>
+반복문 내부에서 각 배열요소에 **reportingUsers**의 Key값인 id_list[i]에 해당하는 Set의 size를 대입해줍니다.<br><br>
+이렇게 되면 answer의 각 배열요소에는 처리 결과 메일 수가 저장되고, 이를 반환하면 정답입니다.
