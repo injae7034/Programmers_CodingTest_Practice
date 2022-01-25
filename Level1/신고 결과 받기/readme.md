@@ -1,0 +1,1 @@
+# 2022 KAKAO BLIND RECRUITMENT에서 나온 Level 1 문제입니다.
