@@ -28,39 +28,36 @@ public class Main {
                     reportingUsers.put(usedId, new HashSet<>());
                 }
                 StringTokenizer tokens = null;//문자열을 분리해서 저장할 임시 공간
-                String reportingId;//신고한 회원 id를 저장할 임시 공간
-                String reportedId;//신고당한 회원 id를 저장할 임시 공간
+                int index = 0;
+                List<String> reportingIds = new ArrayList<>(); //신고한 회원 id들을 저장할 임시 공간
+                List<String> reportedIds = new ArrayList<>();//신고당한 회원 id들을 저장할 임시 공간
                 //신고한 회원과 신고당한 회원의 기록(recording)이 있는 report의 처음부터 마지막까지 반복한다.
                 for(String recording : report)
                 {
                     //공백을 구분으로 문자열을 분리하는 StringTokenizer객체를 생성한다.
                     tokens = new StringTokenizer(recording, " ");
-                    //신고한 회원 id를 구한다.
-                    reportingId = tokens.nextToken();
-                    //신고당한 회원 id를 구한다.
-                    reportedId = tokens.nextToken();
+                    //신고한 회원 id를 구하여 ArrayList에 저장한다.
+                    reportingIds.add(tokens.nextToken());
+                    //신고당한 회원 id를 구하여 ArrayList에 저장한다.
+                    reportedIds.add(tokens.nextToken());
                     //유저가 자신이 신고한 회원 id 기록에 신고당한 회원 id를 추가할 수 있으면
                     //(=유저가 자신이 신고한 회원의 기록에 똑같은 id 중복이 없으면)
-                    if(reportingUsers.get(reportingId).add(reportedId) == true)
+                    if(reportingUsers.get(reportingIds.get(index)).add(reportedIds.get(index)) == true)
                     {
                         //신고당한 회원의 신고횟수 기록을 +1 증가시킨다.
-                        reportedUsers.put(reportedId, reportedUsers.get(reportedId) + 1);
+                        reportedUsers.put(reportedIds.get(index),
+                                reportedUsers.get(reportedIds.get(index)) + 1);
                     }
+                    index++;
                 }
                 //신고한 회원과 신고당한 회원의 기록(recording)이 있는 report의 처음부터 마지막까지 반복한다.
-                for(String recording : report)
+                for(int i = 0; i < index; i++)
                 {
-                    //공백을 구분으로 문자열을 분리하는 StringTokenizer객체를 생성한다.
-                    tokens = new StringTokenizer(recording, " ");
-                    //신고한 회원 id를 구한다.
-                    reportingId = tokens.nextToken();
-                    //신고당한 회원 id를 구한다.
-                    reportedId = tokens.nextToken();
                     //신고당한 회원 id의 신고당한 횟수가 k보다 작으면
-                    if(reportedUsers.get(reportedId) < k)
+                    if(reportedUsers.get(reportedIds.get(i)) < k)
                     {
                         //유저가 신고한 회원리스트 중에서 신고당한 회원 id 기록을 지운다.
-                        reportingUsers.get(reportingId).remove(reportedId);
+                        reportingUsers.get(reportingIds.get(i)).remove(reportedIds.get(i));
                     }
                 }
                 //회원 아이디의 처음부터 마지막까지 반복한다.
