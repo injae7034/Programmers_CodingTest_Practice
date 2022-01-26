@@ -1,6 +1,6 @@
 package ProgramersLevel01;
 
-class Solution {
+class Main {
     public String solution(String new_id) {
         String answer = "";
         //1단계
