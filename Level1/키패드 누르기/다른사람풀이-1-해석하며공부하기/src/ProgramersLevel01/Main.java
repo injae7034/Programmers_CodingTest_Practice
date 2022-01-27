@@ -15,7 +15,7 @@ public class Main {
                 {2, 1},//8
                 {2, 2}//9
         };
-        //엄지손가락 초기 위치
+        //엄지손가락 위치
         int[] leftThumbPos = {3, 0};
         int[] rightThumbPos = {3, 2};
         //왼손잡이인지 오른손잡이인지 정보 저장
@@ -84,7 +84,7 @@ public class Main {
             //왼쪽 엄지와 오른쪽 엄지의 거리가 서로 같으면 자신의 손잡이에 해당하는 엄지손가락으로 누른다.
             return this.hand;
         }
-        //엄지손가락의 위치와 누를 번호 위치와의 거리구하기
+        //엄지손가락의 위치와 누를 번호 위치 사이의 거리구하기
         private int getDistance(int[] thumbPos, int number)
         {
             //엄지손가락의 x좌표와 키패드의 번호 x좌표 차의 절대값과
