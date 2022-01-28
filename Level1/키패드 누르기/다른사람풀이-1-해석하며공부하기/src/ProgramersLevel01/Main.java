@@ -88,7 +88,7 @@ public class Main {
         private int getDistance(int[] thumbPos, int number)
         {
             //엄지손가락의 x좌표와 키패드의 번호 x좌표 차의 절대값과
-            //엄지손가락의 y좌표와 키패드의 번화 y좌표 차의 절대값의
+            //엄지손가락의 y좌표와 키패드의 번호 y좌표 차의 절대값의
             //합을 반환한다.(절대값의 합이 거리가 됨.)
             return Math.abs(thumbPos[0] - numpadPos[number][0])
                     + Math.abs(thumbPos[1] - numpadPos[number][1]);
