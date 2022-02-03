@@ -1,7 +1,10 @@
+package ProgramersLevel01;
+
 import java.util.Arrays;
 
-class Solution {
-    public String solution(String[] participant, String[] completion) {
+public class Main {
+
+    public static String solution(String[] participant, String[] completion) {
         //1. 매개변수로 입력받은 participant와 completion 문자열 배열을 정렬한다.
         Arrays.sort(participant);
         Arrays.sort(completion);
@@ -25,7 +28,6 @@ class Solution {
     public static void main(String[] args) {
         String[] participant = {"leo", "kiki", "eden"};
         String[] completion = {"kiki", "eden"};
-        Solution solution = new Solution();
-        System.out.println(solution.solution(participant, completion));
-        }
+        System.out.println(solution(participant, completion));
+    }
 }
