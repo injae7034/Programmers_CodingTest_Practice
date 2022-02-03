@@ -8,13 +8,27 @@ public class Main {
     public static String solution(String[] participant, String[] completion)
     {
         String answer = "";
-        //1. HashMap을 만든다.
-        Map<String, Integer> playeMap = new HashMap<>();
+        //1. HashMap을 생성한다.
+        Map<String, Integer> playerMap = new HashMap<>();
+        //2. HashMap을 participant로 초기화시킨다.
         for(String player : participant)
         {
-            playeMap.put(player, playeMap.getOrDefault(player, 0) + 1);
+            playerMap.put(player, playerMap.getOrDefault(player, 0) + 1);
         }
-        System.out.println(playeMap);
+        //3. HashMap에서 completion을 참고하여 뺀다.
+        for(String player : completion)
+        {
+            playerMap.put(player, playerMap.get(player) - 1);
+        }
+        //4. value가 0이 아닌 완주하지 못한 선수를 찾는다.
+        for(String key : playerMap.keySet())
+        {
+            if(playerMap.get(key) != 0)
+            {
+                answer = key;
+                break;
+            }
+        }
         return answer;
     }
 
