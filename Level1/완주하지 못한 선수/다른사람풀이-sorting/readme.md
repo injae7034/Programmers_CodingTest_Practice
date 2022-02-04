@@ -53,3 +53,8 @@ i = completion.lenght에 반복을 벗어난 첨자 위치에 있는 participant
 다만 반복이 끝나더라도 i에 저장된 숫자를 기억해야 하기 때문에 for대신에 while을 사용하여서<br><br>
 초기값 i = 0을 반복문 시작하기 전에 선언 및 정의를 하여<br><br>
 반복문이 끝나더라도 i에 저장된 숫자를 알 수 있도록 정하였습니다.
+
+# 깨달은 점
+
+ArrayList를 활용할 때 왜 sorting을 생각하지 못했을까?<br><br>
+다음에는 ArrayList를 사용할 때 sorting도 이용할 수 있다는 것을 항상 염두하자.
