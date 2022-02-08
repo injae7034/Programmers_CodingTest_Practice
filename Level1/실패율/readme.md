@@ -1,6 +1,4 @@
-# 프로그래머스에서 나온 level1 문제입니다.
-## "나의풀이"에는 제가 처음에 문제를 푼 코드입니다. 채점시 20개 테스트에서 11개만 맞추고, 9개는 틀려서 55점을 기록했습니다.
-## "다른사람풀이-HashSet"에는 다른 사람이 푼 코드 중에 HashSet을 이용해 풀이한 코드를 해석하며 스스로 공부한 내용을 적었습니다.
-## "다른사람풀이-배열"에는 다른 사람이 푼 코드 중에 배열을 이용해 풀이한 코드를 해석하며 스스로 공부한 내용을 적었습니다.
+# 2019 KAKAO BLIND RECRUITMENT에서 출제된 level1 문제입니다.
+## "나의풀이"에는 제가 처음에 문제를 푼 코드와 그에 대한 설명을 적었습니다.
 ### 문제의 링크는 아래에 있습니다.
-<a href="https://programmers.co.kr/learn/courses/30/lessons/42862" target="_blank">프로그래머스 - 체육복</a>
+<a href="https://programmers.co.kr/learn/courses/30/lessons/42889" target="_blank">프로그래머스 - 실패율</a>
