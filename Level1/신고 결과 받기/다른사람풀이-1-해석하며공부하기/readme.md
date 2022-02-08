@@ -107,7 +107,7 @@ StringTokenizer의 객체인 tokens에는 처음에는 신고한 회원id가 저
 이 정보를 가져오기 위해 StringTokenizer의 인스턴스메소드인 **nextToken**메소드를 이용합니다.<br><br>
 **처음 nextToken메소드를 호출**하여 그 **반환값**은 **신고한 회원id를 저장할 String 객체인 reportingId에 저장**합니다.<br><br>
 **두번째 nextToken메소드를 호출**하여 그 **반환값**은 **신고당한 회원id를 저장할 String 객체인 reportedId에 저장**합니다.<br><br>
-이제 여기서 Map\<String, Set\<String\>\>의 객체인 **reportingUsers**에서 **Value**값인 **Set\<String\>**에 **reportedId**를 저장할 때 Set에 이미 **reportedId**와 **똑같은 문자열이 있는지 없는지 확인하는 것이 중요**합니다.<br><br>
+이제 여기서 Map\<String, Set\<String\>\>의 객체인 **reportingUsers**에서 **Value**값인 **Set\<String\>에 reportedId**를 저장할 때 Set에 이미 **reportedId**와 **똑같은 문자열이 있는지 없는지 확인하는 것이 중요**합니다.<br><br>
 왜냐하면 문제의 규칙 중에 한명의 회원은 똑같은 회원을 여러번 신고하더라도 그 count는 1회만 유효하다는 규칙이 있기 때문입니다.<br><br>
 예를 들어, 한 회원이 똑같은 회원을 4번 신고하여도 그 count는 1회밖에 처리되지 않습니다.<br><br>
 그래서 이런 중복처리를 해주기 위해서 Set에 신고당한 회원 id를 저장할 때 중복이 있는지 없는지 확인하는 것이 중요합니다.<br><br>
