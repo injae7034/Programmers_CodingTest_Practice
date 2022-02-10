@@ -1,5 +1,36 @@
-# 프로그래머스 연습문제에서 나온 level1 문제입니다.
-## "나의풀이"에는 제가 직접 문제를 푼 코드와 그것에 대한 생각을 적었습니다.
-## "다른사람풀이"에는 다른 사람이 문제를 푼 코드와 그것을 해석하며 공부한 내용을 적었습니다.
-### 문제의 링크는 아래에 있습니다.
-<a href="https://programmers.co.kr/learn/courses/30/lessons/12906" target="_blank">프로그래머스 - 같은 숫자는 싫어</a>
+# 내가 푼 코드
+
+```java
+class Solution {
+    public long solution(int a, int b) {
+        long answer = 0;
+        if(a < b)
+        {
+            for(int i = a; i <= b; i++)
+            {
+                answer += i;
+            }
+        }
+        else if(a > b)
+        {
+            for(int i = b; i <= a; i++)
+            {
+                answer += i;
+            }
+        }
+        else
+        {
+            answer = a;
+        }
+        return answer;
+    }
+}
+```
+
+# 내가 푼 코드 설명
+a와 b의 대소비교를 하여 b가 더 크면<br><br>
+i = a부터 b까지 반복을 하면서 answer에 값을 더하여 누적시킵니다.<br><br>
+a가 b보다 더 크면<br><br>
+i = b부터 a까직 반복을 하면서 answer에 값을 더하여 누적시킵니다.<br><br>
+a와 b가 같으면 answer에 a를 저장합니다.<br><br>
+answer를 반환합니다.
