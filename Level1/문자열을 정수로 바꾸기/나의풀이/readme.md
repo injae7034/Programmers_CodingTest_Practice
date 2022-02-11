@@ -2,26 +2,13 @@
 
 ```java
 class Solution {
-    public String solution(int n) {
-        String answer = "";
-        for(int i = 0; i < n; i++)
-        {
-            if(i % 2 == 0)
-            {
-                answer += "수";
-            }
-            else
-            {
-                answer += "박";
-            }
-        }
-        return answer;
+    public int solution(String s) {
+        return Integer.parseInt(s);
     }
 }
 ```
 
 # 내가 풀이한 코드 설명
 
-i = 0부터 매개변수로 입력 받은 정수 n보다 작은 동안 반복합니다.<br><br>
-짝수 위치(2로 나눈 나머지가 0이면)면 "수"를 더해주고<br><br>
-홀수 위치는 "박"을 더해줍니다.
+Integer의 정적메소드 parseInt는 문자열의 "-"를 음수 부호를 인식할 수 있기 때문에<br><br>
+이 메소드를 호출하면 한 줄에 해결할 수 있습니다.
