@@ -30,7 +30,7 @@ public class Main {
         return new String(arr);
     }
     public static void main(String[] args) {
-	    String answer = solution("try      hello    world");
+	    String answer = solution("try  hello world");
         System.out.println(answer);
     }
 }
