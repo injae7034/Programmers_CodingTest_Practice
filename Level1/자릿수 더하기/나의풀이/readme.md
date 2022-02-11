@@ -1,19 +1,13 @@
 # 내가 풀이한 코드
 
 ```java
-class Solution {
-    public String solution(int n) {
-        String answer = "";
-        for(int i = 0; i < n; i++)
+public class Solution {
+    public int solution(int n) {
+        String number = String.valueOf(n);
+        int answer = 0;
+        for(int i = 0; i < number.length(); i++)
         {
-            if(i % 2 == 0)
-            {
-                answer += "수";
-            }
-            else
-            {
-                answer += "박";
-            }
+            answer += Integer.parseInt(String.valueOf(number.charAt(i)));
         }
         return answer;
     }
@@ -22,6 +16,7 @@ class Solution {
 
 # 내가 풀이한 코드 설명
 
-i = 0부터 매개변수로 입력 받은 정수 n보다 작은 동안 반복합니다.<br><br>
-짝수 위치(2로 나눈 나머지가 0이면)면 "수"를 더해주고<br><br>
-홀수 위치는 "박"을 더해줍니다.
+매개변수로 입력 받은 n을 string클래스이 정적메소드인 valueOf을 이용해 문자열로 바꿔줍니다.<br><br>
+문자열로 바꾼 후 문자열의 각 문자(숫자)를 charAt을 통해 구한 다음 다시 문자열로 바꾸고,<br><br>
+Integer클래스의 parseInt를 통해 정수로 바꿔준 값을 answer에 더해줍니다.<br><br>
+문자열로 바꾸지 않는다면 나머지를 이용하여 자리수를 계산하는 방법도 있습니다.
