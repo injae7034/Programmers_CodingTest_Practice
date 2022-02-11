@@ -2,16 +2,24 @@
 
 ```java
 class Solution {
-    public String solution(String s) {
-        String answer = "";
-        int length = s.length();
-        if(length % 2 == 0)
+    boolean solution(String s) {
+        boolean answer = true;
+        int pCount = 0;
+        int yCount = 0;
+        for(int i = 0; i < s.length(); i++)
         {
-            answer = s.substring(length / 2 - 1, length / 2 + 1);
+            if("p".equalsIgnoreCase(String.valueOf(s.charAt(i))) == true)
+            {
+                pCount++;
+            }
+            else if("y".equalsIgnoreCase(String.valueOf(s.charAt(i))) == true)
+            {
+                yCount++;
+            }
         }
-        else
+        if(pCount != yCount)
         {
-            answer = s.substring(length / 2, length / 2 + 1);
+            answer = false;
         }
         return answer;
     }
@@ -20,10 +28,13 @@ class Solution {
 
 # 내가 풀이한 코드 설명
 
-먼저 매개변수로 입력 받은 문자열의 길이를 length에 저장합니다.<br><br>
-length를 2로 나눈 나머지가 0이면 짝수이기 때문에 가운데 2글자를 잘라야 하는데<br><br>
-이 때 substring을 사용하여 length를 2로 나눈 몫에 1을 빼준 값부터 1을 더해준 값까지 문자열을 자릅니다.<br><br>
--1을 해주는 이우는 문자열의 첨자가 0부터 시작해서이고, +1을 해주는 이유는 substring은 마지막 문자열 위치 이전까지 자르기 때문입니다.<br><br>
-홀수이면 한글자만 출력하면 되는데 length를 2로 나눈 몫이 0부터 시작하는 첨자와 일치하기 때문에 따로 -1을 해줄 필요가 없고,<br><br>
-+1을 해주는 이유는 그 전까지 글자를 자르기 때문에 1글자만 자르기 위해서입니다.<br><br>
-이 후 answer를 반환합니다.
+반복을 돌면서 문자열s의 첫 문자부터 마지막 문자까지 반복합니다.<br><br>
+equalsIgnoreCase를 통해 대소문자를 구분하지 않고 문자열 "p"와 같으면 pCount를 세고,<br><br>
+"y"와 같으면 yCount를 셉니다.<br><br>
+반복문이 끝나고 p와 y의 개수가 다르면 answer에 false를 저장한 뒤에 반환하고,<br><br>
+개수가 같으면 디폴트값 true가 저장된 answer를 반환합니다.
+
+# 아쉬운 점
+
+대소문자를 구분하지 않는다고 했기 때문에 굳이 equalsIgnoreCase를 쓰기보다는<br><br>
+toUpperCase나 toLowerCase로 대소문자를 통일하여 사용하는 것이 더 편함.
