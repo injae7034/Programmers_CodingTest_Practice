@@ -2,12 +2,15 @@
 
 ```java
 class Solution {
-    public String solution(String phone_number) {
-        int backNumber = phone_number.length() - 4;
-        String answer = phone_number.substring(backNumber);
-        for(int i = 0; i < backNumber; i++)
+    public int[][] solution(int[][] arr1, int[][] arr2) {
+        int[][] answer = new int[arr1.length][];
+        for(int i = 0; i < arr1.length; i++)
         {
-            answer = "*" + answer;
+            answer[i] = new int[arr1[i].length];
+            for(int j = 0; j < arr1[i].length; j++)
+            {
+                answer[i][j] = arr1[i][j] + arr2[i][j];
+            }
         }
         return answer;
     }
@@ -16,15 +19,10 @@ class Solution {
 
 # 내가 풀이한 코드 설명하기
 
-매개변수로 입력 받는 phone_number의 뒤의 숫자4자리의 시작 위치를 구하는데<br><br>
-phone_number의 개수에 -4를 해주면 됩니다.<br><br>
-이 값을 backNumber 변수에 저장하고<br><br>
-phone_number의 substring 메소드를 호출하고 매개변수로 backNumber를 입력한 뒤에<br><br>
-answer에 그 반환값을 저장합니다.<br><br>
-answer에 뒤의 번호 4자리가 저장되면 앞에 "\*"를 붙일 차례인데<br><br>
-i = 0부터 backNumber보다 작은동안 반복을 합니다.<br><br>
-반복문 내부에서 answer의 앞에 "\*"을 더해줍니다.<br><br>
-반복문이 끝나면 answer에는 뒤의 4자리 번호만 표시되고<br><br>
-나머지 번호는 모두 "\*"처리됩니다.<br><br>
-다른 사람의 풀이를 보니 substring대신 toCharArray를 이용해 문자배열을 생성한 뒤에<br><br>
-뒤에 4자리를 제외하고 모든 배열요소에 "\*"를 저장하는 방법도 있습니다.
+매개변수로 입력 받는 arr1과 arr2는 덧셈을 하기 위해서는 행과 열의 길이가 같아야 합니다.<br><br>
+즉, arr1과 arr2 중 하나의 배열의 행과 열의 길이에 answer를 맞추면 된다는 말입니다.<br><br>
+일단 먼저 answer의 행 성분을 생성하는데 arr1의 length만큼 힙에 할당합니다.<br><br>
+다음으로 i = 0부터 arr1의 length보다 작은동안 반복합니다.<br><br>
+이 반복문 내부에서 arr1의 i번째 배열요소의 길이만큼 answer의 열 성분을 생성하여 힙에 할당합니다.<br><br>
+다시 반복문으로 j = 0부터 arr1의 i번째 배열요소의 길이보다 작은동안 반복합니다.<br><br>
+answer의 i의 j번째 배열요소에 arr1과 arr2의 i의 j번째 배열요소를 더한 값을 저장합니다.<br><br>
