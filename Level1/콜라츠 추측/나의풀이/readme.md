@@ -2,52 +2,42 @@
 
 ```java
 class Solution {
-    public int solution(int[][] sizes) {
-        //명함의 가로길이와 세로길이를 비교
-        int temp = 0;
-        for(int i = 0; i < sizes.length; i++)
+    public int solution(int num) {
+        long number = num;
+        int answer = 0;
+        while(number > 1 && answer < 500)
         {
-            //명함의 세로 길이가 가로 길이보다 더크면
-            if(sizes[i][0] < sizes[i][1])
+            if(number % 2 == 0)
             {
-                //명함의 가로 길이와 세로 길이를 바꾼다.
-                temp = sizes[i][0];
-                sizes[i][0] = sizes[i][1];
-                sizes[i][1] = temp;
+                number /= 2;
             }
+            else
+            {
+                number = number * 3 + 1;
+            }
+            answer++;
         }
-        //명함의 가로 길이와 세로 길이의 최대 길이 구하기
-        int maxWidth = 0;
-        int maxHeight = 0;
-        for(int i = 0; i < sizes.length; i++)
+        if(number > 1)
         {
-            if(sizes[i][0] > maxWidth)
-            {
-                maxWidth = sizes[i][0];
-            }
-            if(sizes[i][1] > maxHeight)
-            {
-                maxHeight = sizes[i][1];
-            }
+            answer = -1;
         }
-        return maxWidth * maxHeight;
+        return answer;
     }
 }
 ```
 
 # 내가 풀이한 코드 설명하기
 
-첫단계는 명함의 가로 길이와 세로 길이를 비교하여<br><br>
-가로 길이가 더 크면 그대로 두고,<br><br>
-세로 길이가 더 크면 가로 길이와 세로 길이의 값을 서로 바꾸는 단계입니다.<br><br>
-교환을 위해 임시로 값을 저장할 temp변수를 선언하고,<br><br>
-i = 0부터 sizes의 배열요소(1차원배열)의 개수보다 작은동안 반복합니다.<br><br>
-반복문 내부에서 sizes의 배열요소인 1차원배열에 접근하여<br><br>
-가로 길이와 세로 길이를 비교하여<br><br>
-세로 길이가 가로 길이보다 더 크면<br><br>
-가로 길이의 값과 세로 길이의 값을 temp를 이용하여 바꿉니다.<br><br>
-값을 바꾸고 나면 전체 명함의 가로 길이에는<br><br>
-각 명함의 가로와 세로 중 더 큰 길이가 저장되어 있을 것입니다.<br><br>
-다시 i = 0부터 sizes의 길이보다 작은 동안 반복을 하면서<br><br>
-가로 길이의 최대값을 구하고, 세로 길이의 최대값을 구합니다.<br><br>
-다음으로 둘의 곱을 반환합니다.
+처음 입력받은 수가 홀수인데 int의 마지막 범위에 있는 수라면<br><br>
+곱하기 3을 했을 때 int의 범위를 벗어나기 때문에 제대로 된 결과를 얻을 수 없습니다.<br><br>
+이를 방지하기 위해 num을 long 자료형인 number에 저장합니다.<br><br>
+answer의 초기값은 0으로 설정하고, while반복을 하는데<br><br>
+반복조건문은 number가 1보다 큰 동안 그리고 answer가 500보다 작은 동안 반복합니다.<br><br>
+반복문 내부에서 number를 2로 나눈 나머지가 0이면 짝수이기 때문에 number를 2로 나눈 몫을 number에 저장하고<br><br>
+나머지가 0이 아니면 홀수이기 때문에 number에 3을 곱한 값에 1을 더해준 값을 number에 저장합니다.<br><br>
+그리고 1회시도 했기 때문에 answer의 값을 1 증가시켜줍니다.<br><br>
+이렇게 500번을 반복하는데 도중에 number가 1이 되면 반복문을 빠져나와 선택문으로 갔을 때 number가 1이기 때문에<br><br>
+누적됫 시도횟수 answer를 그대로 반환합니다.<br><br>
+만약에 500번을 시도할 때까지 number가 1이 되지 않는다면<br><br>
+answer는 500이기 때문에 while반복문을 벗어나고,<br><br>
+number가 여전히 1보다 크기 때문에 선택문에서 answer에 -1을 저장해준 다음 이 값을 반환합니다.
