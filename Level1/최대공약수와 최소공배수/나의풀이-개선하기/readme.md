@@ -78,7 +78,9 @@ mDivisors의 다음 원소를 구해야 하기 때문에 mIndex를 증가시켜 
 이런식으로 반복을 하면 mDivisors에서 nDivisors의 원소와 비교하여 같은 값은 계속 지우기 때문에 중복을 줄일 수 있습니다.<br><br>
 반복을 하면서 max값을 계속 갱신했기 때문에 max에는 이제 최대공약수 값이 저장되어 있습니다.<br><br>
 최소공약수를 구하기 전에 Math의 max메소드를 이용하여 m과 n중에 더 큰 값을 bigger에 저장하고,<br><br>
-Math의 min 메소드를 이요하여 더 작은 값은 smaller에 저장합니다.<br><br>
+Math의 min 메소드를 이용하여 더 작은 값은 smaller에 저장합니다.<br><br>
+**Math의 max나 min 메소드 모두 매개변수로 입력 받은 두 값이 같을 경우 동일한 값을 반환**하기 때문에<br><br>
+m과 n이 같은 수라도 상관없습니다.<br><br>
 최소공약수를 뜻하는 commonMultiple에 bigger의 값을 저장합니다.<br><br>
 commonMultiple을 smaller로 나눈 나머지가 0이 아닌 동안 반복합니다.<br><br>
 반복문 내부에서 commonMultiple에 bigger 곱하기 multiple(=2)를 해준 값을 저장합니다.<br><br>
