@@ -2,15 +2,12 @@
 
 ```java
 class Solution {
-    public int[][] solution(int[][] arr1, int[][] arr2) {
-        int[][] answer = new int[arr1.length][];
-        for(int i = 0; i < arr1.length; i++)
+    public long[] solution(int x, int n) {
+        long number = x;
+        long[] answer = new long[n];
+        for(int i = 1; i <= answer.length; i++)
         {
-            answer[i] = new int[arr1[i].length];
-            for(int j = 0; j < arr1[i].length; j++)
-            {
-                answer[i][j] = arr1[i][j] + arr2[i][j];
-            }
+            answer[i - 1] = number * i;
         }
         return answer;
     }
@@ -19,10 +16,11 @@ class Solution {
 
 # 내가 풀이한 코드 설명하기
 
-매개변수로 입력 받는 arr1과 arr2는 덧셈을 하기 위해서는 행과 열의 길이가 같아야 합니다.<br><br>
-즉, arr1과 arr2 중 하나의 배열의 행과 열의 길이에 answer를 맞추면 된다는 말입니다.<br><br>
-일단 먼저 answer의 행 성분을 생성하는데 arr1의 length만큼 힙에 할당합니다.<br><br>
-다음으로 i = 0부터 arr1의 length보다 작은동안 반복합니다.<br><br>
-이 반복문 내부에서 arr1의 i번째 배열요소의 길이만큼 answer의 열 성분을 생성하여 힙에 할당합니다.<br><br>
-다시 반복문으로 j = 0부터 arr1의 i번째 배열요소의 길이보다 작은동안 반복합니다.<br><br>
-answer의 i의 j번째 배열요소에 arr1과 arr2의 i의 j번째 배열요소를 더한 값을 저장합니다.<br><br>
+매개변수로 입력받은 int형 x에 int형 정수를 곱한 값을 long배열 answer의 배열요소에 저장해야하는데<br><br>
+이 때 x도 정수형이고 곱한 값도 int형일 때 그 2개를 곱한 값이 int의 범위를 벗어나면<br><br>
+answer의 배열요소에 저장될 때 오류가 발생할 수 있기 때문에<br><br>
+이를 방지하기 위해 long형 number에 x를 옮깁니다.<br><br>
+answer배열을 매개변수로 입력 받은 n만큼 힙에 할당합니다.<br><br>
+i = 1부터 시작하여 answer의 length보다 작거나 같은동안 반복합니다.<br><br>
+i는 number에 곱해주기 위해 1부터 시작하였고, 배열의 첨자는 0부터 시작하기 때문에<br><br>
+answer의 i - 1번째 첨자부터 number에 i를 곱한 값을 저장해줍니다.
