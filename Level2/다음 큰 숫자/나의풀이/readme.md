@@ -1,43 +1,104 @@
 # 내가 풀이한 코드
 ```java
 class Solution {
-    public int solution(int[] arr) {
-        int bigger = 0;
-        int smaller = 0;
-        int commonMinMultiple = 0;
-        int multiple = 0;
-        for(int i  = 0; i < arr.length - 1; i++)
+    public int solution(int n) {
+        //자연수 n을 2진수로 변경
+        String binaryString = Integer.toBinaryString(n);
+        //문자 변경을 위해 2진수 문자열에서 2진수 문자배열을 구한다
+        char[] binaryArr = binaryString.toCharArray();
+        //뒤에서부터 시작하여 최초 1의 위치를 찾는다.
+        int oneIndex = binaryString.lastIndexOf('1');
+        //뒤에서 최초 1의 위치부터 시작하여 뒤에서 0의 위치를 찾는다.
+        int zeroIndex = binaryString.lastIndexOf('0', oneIndex);
+        ///뒤에서 최초 1의 위치부터 시작하여 뒤에서 0의 위치를 찾았으면
+        int oneCount = 0;
+        if(zeroIndex > 0)
         {
-            bigger = Math.max(arr[i], arr[i + 1]);
-            smaller = Math.min(arr[i], arr[i + 1]);
-            commonMinMultiple = bigger;
-            multiple = 2;
-            while(commonMinMultiple % smaller != 0)
+            //0의 위치부터 뒤에 존재하는 1의 개수를 센다.
+            for(int i = zeroIndex; i < binaryString.length(); i++)
             {
-                commonMinMultiple = bigger * multiple;
-                multiple++;
+                if(binaryString.charAt(i) == '1')
+                {
+                    oneCount++;
+                }
             }
-            arr[i + 1] = commonMinMultiple;
+            //0을 1로 변경하고 1의 개수를 감소시킨다.
+            binaryArr[zeroIndex] = '1';
+            oneCount--;
+            //1로 변경한 위치뒤부터 모든 문자를 0으로 변경한다.
+            for(int i = zeroIndex + 1; i < binaryArr.length; i++)
+            {
+                binaryArr[i] = '0';
+            }
+            //마지막 위치부터 시작하여 1의 개수만큼 1로 변경해준다.
+            int lastIndex = binaryArr.length - 1;
+            while(oneCount > 0)
+            {
+                binaryArr[lastIndex--] = '1';
+                oneCount--;
+            }
         }
-        return commonMinMultiple;
+        ///뒤에서 최초 1의 위치부터 시작하여 뒤에서 0의 위치를 찾지 못했으면
+        else
+        {
+            //문자열의 마지막 위치부터시작 해서 0의 위치를 찾는다.
+            zeroIndex = binaryString.lastIndexOf(0);
+            //앞에 1을 더해준다.
+            binaryString = "1" + binaryString;
+            //1을 더해준 문자열에 문자배열을 구한다.
+            binaryArr = binaryString.toCharArray();
+            //두번째 1을 0으로 바꿔준다.
+            binaryArr[1] = '0';
+            //0으로 바꿔준 위치 다음부터 1의 개수와 0의 개수를 센다.
+            int zeroCount = 0;
+            for(int i = 2; i < binaryArr.length; i++)
+            {
+                if(binaryArr[i] == '1')
+                {
+                    oneCount++;
+                }
+                else
+                {
+                    zeroCount++;
+                }
+            }
+            //0의 개수가 0보다 크고 1의 개수가 0보다 크면
+            if(zeroCount > 0 && oneCount > 0)
+            {
+                //1의 개수만큼 반복한다.
+                while(oneCount > 0)
+                {
+                    binaryString = new String(binaryArr);
+                    //뒤에서부터 시작하여 최초 0의 위치를 찾는다.
+                    zeroIndex = binaryString.lastIndexOf('0');
+                    //뒤에서 최초 0의 위치부터 시작하여 뒤에서 1의 위치를 찾는다.
+                    oneIndex = binaryString.lastIndexOf('1', zeroIndex);
+                    //서로 값을 바꾼다.
+                    binaryArr[zeroIndex] = '1';
+                    binaryArr[oneIndex] = '0';
+                    oneCount--;
+                }
+            }
+        }
+        //바뀐 문자배열을 바탕으로 새로운 문자열을 만든다
+        binaryString = new String(binaryArr);
+        //2진수 기준 새로운 문자열을 10진수로 바꿔준다.
+        return Integer.parseInt(binaryString, 2);
     }
 }
 ```
 
 # 내가 풀이한 코드 설명하기
-매개변수로 주어진 arr배열에 저장된 배열원소들의 최소공배수를 구하기 위한 방법으로<br><br>
-저는 먼저 앞의 두 원소끼리 최소공배수를 구하고 그 최소공배수와 다음 배열요소와 최소공배수를 구하는 방법을 이용했습니다.<br><br>
-이를 위해 더 큰 수를 저장할 bigger 작은 수를 저장할 smaller 최소공배수를 저장할 commonMinMultiple, commonMinMultiple을 구할 때 이용되는 배수인 multiple을 선언하였습니다.<br><br>
-i = 0부터 arr의 length에서 1을 뺀값보다 작은동안 반복합니다.<br><br>
--1을 해주는 이유는 반복문 내부에서 arr의 i번째 배열요소와 i + 1번째 배열요소를 비교하기 때문에 arr의 길이에 -1을 뺀 값보다 작은동안 반복을 해야<br><br>
-indexOutOfBoundsException이 발생하는 것을 막을 수 있습니다.<br><br>
-반복문 내부에서 Math의 max메소드를 호출하여 arr의 i번째와 i+1번째 배열요소 중 더 큰 값을 bigger에 담습니다.<br><br>
-Math의 min을 통해 smaller도 구합니다.<br><br>
-bigger를 commonMinMultiple에 저장하고, multiple값을 2로 초기화해줍니다.<br><br>
-commonMinMultiple를 smaller로 나눈 나머지가 0이 아닌동안 반복을 합니다.<br><br>
-반복문 내부에서 commonMinMultiple에 bigger에 multiple을 곱한 값을 저장하고,<br><br>
-multiple의 값을 1 증가시켜줍니다.<br><br>
-반복문이 끝나면 commonMinMultiple에는 smaller와 bigger의 최소공배수 값이 저장될 것입니다.<br><br>
-이 값을 arr의 i + 1번째 값에 저장해줍니다.<br><br>
-그래야 다음 반복에서 i + 1과 i + 2번째 배열요소의 최소공배수 값을 구할 수 있기 때문입니다.<br><br>
-반복이 끝나면 arr배열의 모든 원소들의 최소공배수를 구하여 반영한 commonMinMultiple을 구할 수 있습니다.
+
+주어진 자연수 n을 이진수로 변경하여 그것을 바탕으로 이진수 문자 배열을 생성합니다.<br><br>
+그 문자를 기준으로 하여 변경하면서 문제에서 제시하는 조건대로 같은 1의 개수를 구하려다 보니<br><br>
+코드가 굉장히 길어지고 복잡해졌습니다.<br><br>
+
+# 아쉬운 점
+기존의 수에서 변경을 하려고 하다 보니 굉장히 복잡하고 헷갈립니다.<br><br>
+이럴 때는 차라리 발상의 전환을 하여 기존 것에서 조건에 맞게 변경하는 것이 아니라<br><br>
+조건에 맞는 새로운 수를 생성하는 것이 훨씬 낫습니다.<br><br>
+즉, 자연수 n의 이진수에서 변경을 하는 것보다 새로 만드는 것이 훨씬 간단합니다.<br><br>
+다른 사람의 코드를 보니 애초에 자연수 n을 이진수로 바꾼 다음 거기서 먼저 1의 개수를 셉니다.<br><br>
+그 다음 n에 +1을 해준 값을 2진수로 바꿔서 1의 개수가 자연수 n과 같을때동안 반복하면<br><br>
+손쉽게 문제에서 제시한 기준대로 다음 큰 수를 구할 수 있습니다.
