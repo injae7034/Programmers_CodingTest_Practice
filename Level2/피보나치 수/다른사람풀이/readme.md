@@ -13,7 +13,6 @@ class Solution {
         return answer[n];
     }
 }
-}
 ```
 
 # 다른 사람이 풀이한 코드 해석하며 공부하기
