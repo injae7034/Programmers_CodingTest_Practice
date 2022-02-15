@@ -1,43 +1,54 @@
-# 내가 풀이한 코드
+# 다른 사람이 풀이한 코드
 ```java
 class Solution {
-    public int solution(int[] arr) {
-        int bigger = 0;
-        int smaller = 0;
-        int commonMinMultiple = 0;
-        int multiple = 0;
-        for(int i  = 0; i < arr.length - 1; i++)
+    public String solution(int n) {
+        String[] numbers = {"4", "1", "2"};
+        String answer = "";
+        int remainder = 0;
+        while(n > 0)
         {
-            bigger = Math.max(arr[i], arr[i + 1]);
-            smaller = Math.min(arr[i], arr[i + 1]);
-            commonMinMultiple = bigger;
-            multiple = 2;
-            while(commonMinMultiple % smaller != 0)
+            remainder = n % 3;
+            n /= 3;
+            if(remainder == 0)
             {
-                commonMinMultiple = bigger * multiple;
-                multiple++;
+                n--;
             }
-            arr[i + 1] = commonMinMultiple;
+            answer = numbers[remainder] + answer;
         }
-        return commonMinMultiple;
+        return answer;
     }
 }
 ```
 
-# 내가 풀이한 코드 설명하기
-매개변수로 주어진 arr배열에 저장된 배열원소들의 최소공배수를 구하기 위한 방법으로<br><br>
-저는 먼저 앞의 두 원소끼리 최소공배수를 구하고 그 최소공배수와 다음 배열요소와 최소공배수를 구하는 방법을 이용했습니다.<br><br>
-이를 위해 더 큰 수를 저장할 bigger 작은 수를 저장할 smaller 최소공배수를 저장할 commonMinMultiple, commonMinMultiple을 구할 때 이용되는 배수인 multiple을 선언하였습니다.<br><br>
-i = 0부터 arr의 length에서 1을 뺀값보다 작은동안 반복합니다.<br><br>
--1을 해주는 이유는 반복문 내부에서 arr의 i번째 배열요소와 i + 1번째 배열요소를 비교하기 때문에 arr의 길이에 -1을 뺀 값보다 작은동안 반복을 해야<br><br>
-indexOutOfBoundsException이 발생하는 것을 막을 수 있습니다.<br><br>
-반복문 내부에서 Math의 max메소드를 호출하여 arr의 i번째와 i+1번째 배열요소 중 더 큰 값을 bigger에 담습니다.<br><br>
-Math의 min을 통해 smaller도 구합니다.<br><br>
-bigger를 commonMinMultiple에 저장하고, multiple값을 2로 초기화해줍니다.<br><br>
-commonMinMultiple를 smaller로 나눈 나머지가 0이 아닌동안 반복을 합니다.<br><br>
-반복문 내부에서 commonMinMultiple에 bigger에 multiple을 곱한 값을 저장하고,<br><br>
-multiple의 값을 1 증가시켜줍니다.<br><br>
-반복문이 끝나면 commonMinMultiple에는 smaller와 bigger의 최소공배수 값이 저장될 것입니다.<br><br>
-이 값을 arr의 i + 1번째 값에 저장해줍니다.<br><br>
-그래야 다음 반복에서 i + 1과 i + 2번째 배열요소의 최소공배수 값을 구할 수 있기 때문입니다.<br><br>
-반복이 끝나면 arr배열의 모든 원소들의 최소공배수를 구하여 반영한 commonMinMultiple을 구할 수 있습니다.
+# 다른 사람이 풀이한 코드 해석하며 공부하기
+
+숫자가 1, 2, 4 세 가지만 존재하므로 n을 3으로 나눈 나머지 연산을 구합니다.<br><br>
+1 % 3 = 1 (124 나라 : 1)<br><br>
+2 % 3 = 2 (124 나라 : 2)<br><br>
+3 % 3 = 0 (124 나라 : 4)<br><br>
+나머지 연산으로 나온 숫자(나머지)를 배열첨자로 하는<br><br>
+124 나라의 숫자를 나타내는 문자열(String)배열 numbers를 생성합니다.
+나머지가 0일 때, 즉, 배열첨자 0번째는 124나라의 숫자 4<br><br>
+나머지가 1일 때, 즉, 배열첨자 1번째는 124나라의 숫자 1<br><br>
+나머지가 2일 때, 즉, 배열첨자 2번째는 124나라의 숫자 2<br><br>
+String numbers = {"4", "1", "2"};<br><br>
+다음으로 124나라의 숫자로 두 자릿수 이상을 처리해야 하는데 바로 나누기 연산을 통해<br><br>
+남은 숫자를 다시 위의 과정을 거치는 것이다.<br><br>
+이 때 나머지 연산의 결과 인덱스는 가장 뒤쪽부터 붙여나갑니다.<br><br>
+124나라의 각 자리수는 주어진 자연수를 3으로 나눈 것의 나머지로 결정됩니다.<br><br>
+n을 3으로 나눈 나머지를 이용해 numbers의 첨자로 사용하여 해당 자리수에 들어갈 숫자 하나를 얻습니다.<br><br>
+자연수 n을 3으로 나눈 것의 몫을 다시 n으로 합니다.<br><br>
+n이 0보다 크다면 1,2번 과정을 계속해서 반복하여 자리수를 얻습니다.<br><br>
+주의할 점은 규칙 하나가 더 적용되는데 각자리수 계산을 위해 나머지를 구하는 과정에서<br><br>
+나머지가 0일 경우 나누어지는 수 n에서 1을 빼줘야합니다.
+
+# 느낀 점
+저도 일단 1, 2, 4를 문자열 배열로 만들어서 이용해야겠다는 생각은 하였습니다.<br><br>
+그러나 저 같은 경우는 문제를 풀 때 나머지를 구하는 방식에 대해서는 전혀 생각하지 못하고<br><br>
+자릿수가 3 + 3의 제곱 + 3의 세제곱 이런식으로 늘어난다는 것에 착안하여<br><br>
+자연수 n이 sum = 3의 1승보다 작은지<br><br>
+자연수 n이 sum = 3의 1승 + 3의 2승보다 작은지 구한 다음<br><br>
+sum과 n을 뺀 값을 통해 어떻게든 124나라의 숫자와 규칙을 구하려고 애쓰다 도저히 안되서 못풀었습니다ㅠ<br><br>
+이러한 문제는 어떻게 보면 10진법을 2진법으로 변경하듯이 진법 변경 문제인데<br><br>
+원래 10진법에서 2진법을 구할 때도 나머지를 이용해 구합니다<br><br>
+다음부터는 이런식으로 **진법 변경 문제가 나오면 꼭 나머지를 이용**하도록 생각해야겠습니다.
