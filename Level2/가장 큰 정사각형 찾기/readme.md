@@ -2,4 +2,4 @@
 ## 이 문제는 풀지 못해서 "나의풀이"는 없습니다.
 ## "다른사람풀이"에는 다른 사람이 푼 코드와 그것을 해석하며 공부한 내용을 적었습니다.
 ### 문제의 링크는 아래에 있습니다.
-<a href="https://programmers.co.kr/learn/courses/30/lessons/12899" target="_blank">프로그래머스 - 124 나라의 숫자</a>
+<a href="https://programmers.co.kr/learn/courses/30/lessons/12905" target="_blank">프로그래머스 - 가장 큰 정사각형 찾기</a>
