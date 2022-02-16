@@ -1,16 +1,24 @@
 # 다른사람이 푼 코드
 
 ```java
-import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
 
 class Solution {
     public boolean solution(String[] phone_book) {
-        Arrays.sort(phone_book);
-        for(int i = 0; i < phone_book.length - 1; i++)
+        Map<String, Integer> map = new HashMap<>();
+        for(int i = 0; i < phone_book.length; i++)
         {
-            if(phone_book[i + 1].startsWith(phone_book[i]))
+            map.put(phone_book[i], 1);
+        }
+        for(int i = 0; i < phone_book.length; i++)
+        {
+            for(int j = 1; j < phone_book[i].length(); j++)
             {
-                return false;
+                if(map.containsKey(phone_book[i].substring(0, j)))
+                {
+                    return false;
+                }
             }
         }
         return true;
@@ -20,22 +28,19 @@ class Solution {
 
 # 다른 사람이 풀이한 코드 분석하며 공부하기
 
-매개변수로 주어지는 phone_book의 문자열 배열을 오름차순으로 정렬하면<br><br>
-사전편찬순으로 정렬이 됩니다.<br><br>
-즉, "6", "12" ,"6789"였다면 "12", "6", "6789"로 정렬이 되고<br><br>
-"123", "1000", "1234"를 정렬하면 "123", "1234", "1000"로 정렬이 됩니다.<br><br>
-이렇게 정렬이 되면 이중반복을 돌면서 일일이 모든 원소끼리 비교를  할 필요가 없습니다.<br><br>
-한 번의 반복으로 앞뒤로 비교를 하면 접두사가 있는지 없는지 알 수 있습니다.<br><br>
-"12"와 "6"을 비교하고, "6"을 "6789"와 비교해서 결과를 도출하면 된다는 것입니다.<br><br>
-"12"와 "6789"는 비교할 필요가 없습니다.<br><br>
-왜냐하면 문자열을 사전편찬순으로 정렬했기 때문에<br><br>
-예를 들어 0번째 문자열은 1번째 문자열의 접두사일 수 있고,<br><br>
-1번째 문자열은 2번째 문자열의 접두사일 수 있습니다.<br><br>
-하지만 0번째 문자열이 1번째 문자열의 접두사가 아닌데<br><br>
-2번째 문자열의 접두사일 수는 없습니다.<br><br>
-반대로 0번째 문자열이 1번째 문자열의 접두사이면서 2번째 문자열의 접두사일수는 있습니다.<br><br>
-이제 이러한 사실을 바탕으로 반복을 1번 돌면서 앞뒤로 비교만 하면 접두사를 찾을 수 있습니다.<br><br>
-i = 0부터 phone_book의 length - 1보다 작은동안 반복합니다.<br><br>
-그리고 반복문 내부에서 다음원소(phone_book의 i + 1번째 원소)가 현재원소(phone_book의 i번째 원소)의<br><br>
-접두사로 시작하는지(String클래스의 startsWith메소드)확인하여 true이면 false를 반환하고<br><br>
-반복이 끝날때까지 메소드가 종료되지 않았다면 접두사가 없다는 뜻이기 때문에 false를 반환합니다.
+매개변수로 주어지는 phone_book의 문자열 배열의 원소 String을 Key값으로 하는 Map의 객체를 생성합니다.<br><br>
+i = 0부터 phone_book의 길이보다 작은동안 반복을 하면서 phone_book의 원소인 문자열을 key값으로<br><br>
+Value값은 해당 키가 있다는 표현을 하기 위해 Integer로 1을 put합니다.<br><br>
+map의 초기화작업이 끝났으면 이중반복을 할 차례인데<br><br>
+i = 0부터 시작하여 phone_book의 길이보다 작은동안 반복합니다.<br><br>
+j = 1부터 시작하여 phone_book의 i번째 배열요소인 문자열의 길이보다 작은동안 반복합니다.<br><br>
+반복문 내부에서 map의 containsKey메소드를 통해 매개변수로 넣은 문자열이 map의 key로 존재하는지 여부를 반환받습니다.<br><br>
+이 때 매개변수로 phone_book의 i번째 문자열을 substring을 통해 0번째부터 j - 1번째까지 잘라줍니다.<br><br>
+j = 1부터 시작하기 때문에 처음에는 접두사 1글자가 해당 map에 key로 존재하는지 확인하고<br><br>
+없다면 j값을 계속 늘려가면서 확인합니다.<br><br>
+phone_book의 i번째 원소의 길이보다 작은동안 반복이기 때문에<br><br>
+substring에는 최대 phone_book의 i번째 배열요소의 길이보다 -1 작은 값이 들어오기 때문에<br><br>
+map에서 자기 자신을 검색하는 일은 없습니다.<br><br>
+딱 자기 자신이 되기 전의 앞글자까지만 검색합니다.<br><br>
+즉, phone_book의 전체 원소를 처음부터 마지막까지 하나씩 구해서<br><br>
+그 원소(문자열)를 한 글자씩 늘려가면서 잘라서 map에 접두사로 저장된 key가 있는지 확인하는 방법입니다.
