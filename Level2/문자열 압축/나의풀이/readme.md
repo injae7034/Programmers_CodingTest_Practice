@@ -7,7 +7,7 @@ class Solution {
     public int solution(String s) {
      StringBuilder stb;
         String front;
-        String back ;
+        String back;
         int count;
         int[] answer = new int[s.length() / 2];
         if(s.length() == 1)
