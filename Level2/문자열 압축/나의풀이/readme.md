@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 class Solution {
     public int solution(String s) {
-     StringBuilder stb;
+        StringBuilder stb;
         String front;
         String back;
         int count;
