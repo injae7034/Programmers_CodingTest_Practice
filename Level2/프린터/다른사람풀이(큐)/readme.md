@@ -1,4 +1,4 @@
-# 내가 푼 코드
+# 다른 사람이 푼 코드
 
 ```java
 import java.util.List;
@@ -6,49 +6,36 @@ import java.util.ArrayList;
 
 class Solution {
     public int solution(int[] priorities, int location) {
+        //1. List 생성해서 priorites 담기
         List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < priorities.length; i++)
+        for(int priority : priorities)
         {
-            list.add(priorities[i]);
+            list.add(priority);
         }
-        int temp;
-        int i = 0;
         int answer = 0;
-        while(i < list.size())
+        while(!list.isEmpty())
         {
-            temp = list.get(0);
-            int j = 1;
-            while(j < list.size())
+            //2. 0번을 꺼내서 maxPriority인지 확인하기
+            Integer priority = list.remove(0);
+            if(list.stream().anyMatch(otherPriority -> priority < otherPriority))
             {
-                if(temp < list.get(j))
-                {
-                    list.remove(0);
-                    list.add(temp);
-                    if(location > 0)
-                    {
-                        location--;
-                    }
-                    else
-                    {
-                        location = list.size() - 1;
-                    }
-                    temp = list.get(0);
-                    j = 1;
-                }
-                else
-                {
-                    j++;
-                }
-            }
-            answer++;
-            list.remove(0);
-            if(location == 0)
-            {
-                break;
+                //3. maxPriority가 아니면 다시 끝에 넣기
+                list.add(priority);
             }
             else
             {
-                location--;
+                //4. maxPriority면 실행시키기
+                answer++;
+                //5. 실행시키는 작업이 내가 선택한 location이 맞는지 확인하기
+                if(location == 0)
+                {
+                    break;
+                }
+            }
+            location--;
+            if(location < 0)
+            {
+                location = list.size() - 1;
             }
         }
         return answer;
@@ -56,29 +43,27 @@ class Solution {
 }
 ```
 
-# 내가 푼 코드 설명
+# 다른 사람이 푼 코드 분석하며 공부하기
 
 List의 객체를 생성하여 매개변수로 입력 받은 priorites 배열요소들을 add시킵니다.<br><br>
-i = 0부터 list의 size보다 작은 동안 반복을 합니다.<br><br>
-첫번째 원소 값을 구해서 temp에 저장하고 다시 j = 1부터 list의 size보다 작은 동안 반복합니다.<br><br>
-반복문 내부에서 temp가 list의 j번째 원소보다 작으면<br><br>
-list의 0번째 원소를 제거하고, temp를 add시켜줍니다.<br><br>
-location이 0보다 크면 location의 위치를 -1 감소시켜주고<br><br>
-location이 0이면 location의 위치를 list의 size에서 1 감소한 값을 대입해줍니다.<br><br>
-temp에는 다시 list의 첫번째 원소를 저장시키고<br><br>
-j = 1로 초기화시킵니다.<br><br>
-temp가 list의 j번째 원소보다 크면 j의 값을 +1시켜 줍니다.<br><br>
-첫번째 반복문에서 나오면 가장 우선순위가 높은 원소를 실행시켜주는 의미로<br><br>
-answer를 +1시켜주고<br><br>
-list에서 첫번째 원소가 현재 가장 우선순위가 높은 원소이기 떄문에 실행했다는 의미로 remove시켜줍니다.<br><br>
-이 때 location의 위치가 0 이면 반복문을 빠져나가고<br><br>
-location이 0이 아니면 1감소시킵니다.<br><br>
-location이 0이 되거나 i가 list의 size와 같아지는 경우 반복문을 벗어나고<br><br>
-이 때 누적된 answer를 반환합니다.
+list는 우선순위를 정하여 계속 실행을 할 것이기 때문에 결국에 마지막에는 size가 0이 될 것이기 때문에<br><br>
+list가 비어있지 않은 동안 반복을 합니다.<br><br>
+반복문 내부에서 첫번째 원소 값을 remove를 통해서 꺼냅니다.<br><br>
+remove에 index를 넣으면 해당 index의 원소를 list에서 제거하고, 그 원소의 값을 반환해주기 때문에<br><br>
+여기서 list 원소의 자료형은 Integer이기 때문에 priority(자료형 Integer)로 list의 첫번째 원소를 제거한 뒤에 그 값을 반환받습니다.<br><br>
+stream을 사용하고, stream의 anymatch와 람다식을 사용하여<br><br>
+list에서 priority보다 더 큰 원소가 있는지 확인한 뒤에 있다면 다시 끝에 넣어주고 없다면 실행시켜주는 의미로 answer의 값을 1 증가시킵니다.<br><br>
+이 때 현재 location의 위치가 0이라면 우리가 선택한 작업이기 때문에 break를 통해 반복을 끝내고 누적된 answer값을 반환합니다.<br><br>
+반복을 돌 때 마다 location의 위치를 감소시키는데 location이 0보다 작아지면 제일 마지막으로 이동했다는 의미이기 때문에<br><br>
+list의 size에서 -1한 값을 대입해줍니다.<br><br>
+이런식으로 반복을 하면 answer를 구할 수 있습니다.
 
-# 아쉬운 점
-location의 값이 계속 변동되어서 이에 대한 처리를 어떻게 해야 할지 잘몰라서 많이 헤맸습니다.<br><br>
-헤메다가 결국에 location의 위치를 감소시키고 0이 될 때가 프린터에서 출력되는 순서라는 것을 나중에 알게 되어 시간이 많이 걸렸습니다.<br><br>
-그리고 첫번째 원소를 미리 꺼내지 않고 get하여 비교한 다음에 꺼낼지 말지 결정하다보니 코드 중복이 심해졌습니다.<br><br>
-어차피 최대값이라면 실행을 해야 해서 remove해야하고 최대값이 아니면 뒤로 가야해서 remove해야했기 때문에 무조건 remove를 하면 됬는데<br><br>
-그렇게 하지 않고 빼기 전에 get으로 값을 구한 다음 뺄지 말지 여부를 정하느라 코드 중복이 심해지고 코드가 길어졌습니다.
+# 느낀 점
+
+list의 remove를 통해 해당위치의 값을 제거하고 그 값을 반환받으면 꺼낸 효과를 볼 수 있습니다.<br><br>
+그리고 어차피 첫번째 원소는 무조건 꺼내서 실행을 시키거나 다시 뒤로 넣거나 둘 중에 하나기 때문에 get을 할 필요없이<br><br>
+처음부터 무조건 remove하여 코드중복을 줄입니다.<br><br>
+또한 location의 위치를 감소시킬 때 저 같은 경우는 두군데에서 이 처리를 하다보니 코드가 중복되고 복잡해졌는데<br><br>
+이 위치를 적절한 곳에 둔다면 한 번만 이 처리를 해도 되어 코드중복이 줄고 깔끔해집니다.<br><br>
+또한 stream의 anyMatch를 이용하면 반복문을 한 번 줄일 수 있고,<br><br>
+여기에 람다식까지 사용해주면 코드를  코드가 훨씬 더 깔끔하게 줄일 수 있습니다.
