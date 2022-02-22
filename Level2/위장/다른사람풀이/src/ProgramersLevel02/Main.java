@@ -29,7 +29,7 @@ public class Main {
         answer = solution(new String[][]{{"crowmask", "face"},
                 {"bluesunglasses", "face"}, {"smoky_makeup", "face"}});
         System.out.println(answer);
-        answer = solution(new String[][]{{"A", "heargear"}, {"B", "headgear"}, {"C", "face"},
+        answer = solution(new String[][]{{"A", "headgear"}, {"B", "headgear"}, {"C", "face"},
                 {"D", "face"}, {"E", "face"}, {"F", "top"}, {"G", "bottom"}, {"H", "bottom"},
                 {"I", "bottom"}, {"J", "bottom"}});
         System.out.println(answer);
