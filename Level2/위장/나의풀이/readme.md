@@ -64,6 +64,9 @@ clothes의 length만큼을 더해줍니다.<br><br>
 clothes 2차원 배열을 for each반복을 통해 cloth 1차원배열을 구하고 거기서 1번째 배열첨자의 요소를 key값으로<br><br>
 value는 getOrDefault를 이용해 key값이 이미 map에 들어가 있는 경우 그 value값을 구한 다음 1을 더해주고,<br><br>
 key값이 없는 경우에는 0을 초기값으로 한 다음 1을 더해줍니다.<br><br>
+여기까지는 **Level1에서 풀이한 '완주하지 못한 선수'** 와 풀이 방법이 같습니다.<br><br>
+<a href="https://programmers.co.kr/learn/courses/30/lessons/42576" target="_blank">프로그래머스 - 완주하지 못한 선수</a><br><br>
+<a href="https://github.com/injae7034/Programmers_CodingTest_Practice/tree/main/Level1/%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80%20%EB%AA%BB%ED%95%9C%20%EC%84%A0%EC%88%98" target="_blank">깃허브 - 완주하지 못한 선수</a><br><br>
 map을 생성하고 초기화가 끝났으면 list를 생성해서 map의 value값을 list로 옮겨줍니다.<br><br>
 그 이유는 map에서는 2개의 조합, 3개의 조합, ... n개의 조합을 반복문을 이용해 표현하기가 어렵기 때문입니다.<br><br>
 1개의 조합은 이미 answer에 더해져 있기 때문에<br><br>
