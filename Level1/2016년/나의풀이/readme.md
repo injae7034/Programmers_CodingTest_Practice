@@ -20,7 +20,7 @@ class Solution {
 java.time.LocalDate를 import해줍니다.<br><br>
 LocalDate클래스의 정적메소드인 of을 이용하여 년의 매개변수로 2016을 전달합니다.<br><br>
 달의 매개변수는 Month클래스의 정적메소드인 of에 월을 나타내는 a를 매개변수로 전달하여 Month클래스의 객체를 반환받고,<br><br>
-이를 LocalDate클래스의 정적메소드인 of의 Month매개변수로 홯용합니다.<br><br>
+이를 LocalDate클래스의 정적메소드인 of의 Month매개변수로 활용합니다.<br><br>
 나머지 일짜 매개변수는 b를 그대로 넣어줍니다.<br><br>
 즉, LocalDate클래스의 정적메소드인 of에 년, 월, 일을 매개변수로 넣어주면 해당일자의 LocalDate클래스의 객체가 생성되는데<br><br>
 이 객체를 통해 getDayOfWeek메소드를 호출하면 해당 년, 월, 일의 요일을 반환합니다.<br><br>
